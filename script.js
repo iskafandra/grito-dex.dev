@@ -28,7 +28,7 @@ async function getPokemonInfo(id) {
 
     return { 
         id, 
-        name: spanishName.toUpperCase(), // Estilo retro en mayúsculas
+        name: spanishName.toUpperCase(),
         cry: data.cries.latest,
         sprite: data.sprites.front_default 
     };
@@ -37,7 +37,7 @@ async function getPokemonInfo(id) {
 async function startNewRound() {
     hasGuessed = false;
     feedback.classList.add('hidden');
-    optionsContainer.innerHTML = '<p style="font-size:8px">BUSCANDO...</p>';
+    optionsContainer.innerHTML = '<p style="font-size:10px">BUSCANDO...</p>';
     
     const { min, max } = GEN_RANGES[genSelect.value];
     const ids = [];
@@ -52,7 +52,7 @@ async function startNewRound() {
         cryAudio = new Audio(currentTarget.cry);
         renderOptions(pokemons);
     } catch (error) {
-        optionsContainer.innerHTML = 'ERROR API';
+        optionsContainer.innerHTML = 'ERROR DE RED';
     }
 }
 
@@ -81,11 +81,11 @@ function handleGuess(selectedId, btnElement) {
 
     if (selectedId === currentTarget.id) {
         btnElement.classList.add('correct');
-        message.innerText = `¡LOGRADO!`;
+        message.innerText = `¡ACIERTO TOTAL!`;
         sndSuccess.play();
     } else {
         btnElement.classList.add('incorrect');
-        message.innerText = `ERA ${currentTarget.name}`;
+        message.innerText = `FALLASTE: ERA ${currentTarget.name}`;
         sndError.play();
         
         allButtons.forEach(btn => {
